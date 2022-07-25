@@ -1,0 +1,71 @@
+.navbar {
+    position: fixed;
+   right: 0;
+    top: 0;
+    height: 50px;
+    width: calc(100vw - 100px );
+    border-right: solid 1px lightgray;
+    color: grey;
+    font-weight: 300;
+    background: #f5f5f5;
+    box-sizing: border-box;
+    z-index: 3;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width .3s ease-in-out;
+}
+@media screen and (min-width: 575px) {
+    .navbar {
+        width: calc(100vw - 200px );
+        padding: 0 15px;
+    }
+}
+@media screen and (min-width: 840px) {
+    .navbar {
+        width: calc(100vw - 250px);
+        padding: 0 25px;
+        text-overflow: ellipsis;
+    }
+}
+
+.navbar.closed {
+    width: calc(100vw - 50px);
+}
+
+.content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 24px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.navbar [contenteditable=true]:empty:before{
+    content: 'Enter your question or text here...';
+    pointer-events: none;
+    display: block; /* For Firefox */
+    color: grey;
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 640px) {
+    .content {
+        width: 300%;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .navbar {
+        overflow: scroll;
+    }
+
+    .navbar [contenteditable=true]:empty:before {
+        font-size:16px;
+    }
+}

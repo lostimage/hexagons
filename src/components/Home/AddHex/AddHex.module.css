@@ -1,0 +1,74 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    height: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    column-count: 2;
+    justify-content: center;
+    gap: 30px 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.button {
+    height: auto;
+    transition: 0.4s ease-in-out;
+    transition-property: opacity, filter, -webkit-filter;
+    position: relative;
+}
+
+.button img {
+    opacity: 0.3;
+    width: 100%;
+    height: auto;
+    transition: 0.4s ease-in-out;
+    transition-property: opacity, filter, -webkit-filter;
+}
+
+.button {
+    width: 70%;
+}
+
+@media screen and (min-width: 840px) {
+    .button {
+        width: 46%;
+    }
+}
+
+
+@media screen and (min-width: 575px) {
+    .button {
+        width: 56%;
+    }
+}
+
+
+.image {
+    opacity: 0.3;
+    width: 100%;
+    height: auto;
+    transition: 0.4s ease-in-out;
+    transition-property: opacity, filter, -webkit-filter;
+    max-width: 100%;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 5px;
+    text-align: center;
+    padding: 7px 10px;
+    line-height: 1;
+}
+
+.wrapper:hover .tooltip{
+    opacity: 1;
+}

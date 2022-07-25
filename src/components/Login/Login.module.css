@@ -1,0 +1,38 @@
+.header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    color: #44546A;
+    padding: 10px 25px;
+    font-size: 22px;
+    text-align: center;
+    min-width: 150px;
+    background-color: #fff;
+    border: 2px solid #41719C;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.button:not(:first-child) {
+    margin-left: 30px;
+}
+
+.button:hover {
+    background-color: #44546A;
+    border-color: #44546A;
+    color: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+    .header {
+        justify-content: flex-end;
+        padding: 30px 15vw;
+    }
+}

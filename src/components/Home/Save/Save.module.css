@@ -1,0 +1,52 @@
+.wrapper {
+    width: 100%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+    .wrapper {
+        width: 50%;
+        margin-bottom: 30px;
+        padding: 0 5px;
+    }
+}
+
+.image {
+    opacity: 0.5;
+    width: 55px;
+}
+
+.button {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    line-height: 1;
+    font-size: 13px;
+}
+
+.wrapper:hover .tooltip{
+    opacity: 1;
+}
+
+.wrapper:hover .image {
+    max-width: 100%;
+    opacity: 1;
+}

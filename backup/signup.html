@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        const data = {
+            inviteCode : "thinkfully",
+            fullName: "test user",
+            userName: "info@tsks.me",
+            password: "QPnm5r8x#",
+            confirmPassword: "QPnm5r8x#"
+        };
+        fetch('https://thinkfully.dev.amediatek.com/user/create',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }
+        )
+                .then((response) => {
+                    return response.json();
+                })
+                .then((response) => {
+                    console.log(response)
+                })
+    });
+</script>
+</body>
+</html>

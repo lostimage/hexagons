@@ -1,0 +1,53 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height:100%;
+    width: 100px;
+    border-right: solid 1px lightgray;
+    background: #f5f5f5;
+    box-sizing: border-box;
+    z-index: 3;
+    transition: transform .3s ease-in-out;
+    transform-origin: left center;
+    padding: 50px 10px 0;
+}
+@media screen and (min-width: 575px) {
+    .navbar {
+        width: 200px;
+        padding: 0 15px;
+    }
+}
+@media screen and (min-width: 840px) {
+    .navbar {
+        width: 250px;
+        padding: 0 25px;
+    }
+}
+
+.iconWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+    .logo {
+        display: block;
+    }
+}
+
+.icon {
+    width: 40%;
+    max-height: 80px;
+}
+
+.open {
+    /*transform: scaleX(1);*/
+    transform: scaleX(1);
+}
+
+.closed {
+    transform: scaleX(0);
+}

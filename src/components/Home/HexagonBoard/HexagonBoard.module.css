@@ -1,0 +1,231 @@
+.grid {
+    --amount: 24;
+    --counter: 1;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(var(--amount), 1fr 2fr) 1fr;
+    grid-gap: 0.4em 0.8em;
+    width: 1670px;
+    height: 1951px;
+    /*min-width: calc(100vw - 250px);*/
+    /*min-height: calc(100vh - 50px);*/
+    font-size: 11px;
+    /*transform: translate(-50px , -100px);*/
+}
+
+.wrapper {
+    overflow: visible;
+}
+
+.board {
+    position: relative;
+    padding-top: 47px;
+    box-sizing: border-box;
+    height: 100vh;
+    width: calc(100vw - 250px);
+    overflow: hidden;
+    transition: width .3s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+   .board {
+       width: calc(100vw - 100px);
+   }
+}
+
+.board.closed {
+    width: 100vw;
+}
+
+.board.closed .wrapper{
+    width: 100vw;
+}
+
+.wrapper {
+    position: relative;
+    overflow: scroll;
+    height: calc(100vh - 30px);
+    width: calc(100vw - 250px);
+    transition: width .3s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+   .wrapper {
+       width: calc(100vw - 100px);
+   }
+}
+
+.border {
+    position: absolute;
+    --amount: 25;
+    --counter: 1;
+    margin: 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(var(--amount), 1fr 2fr) 1fr;
+    grid-gap: 0.4em 0.8em;
+    width: 1738px;
+    transform: translate( 0 , 50%);
+    max-height: 75px;
+    overflow: hidden;
+}
+
+.bottom {
+    left: 0;
+    right: 0;
+    bottom: 2px;
+}
+
+.left , .right{
+    width: 86px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+    position: absolute;
+    transform: translate(-80% , -40px);
+}
+
+.right {
+    left: auto;
+    right: -52px;
+    top: 0;
+    transform: none;
+}
+
+.top {
+    top: 2px;
+    left: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+.grid.auto {
+    cursor: auto;
+}
+
+.grid.pointer {
+    cursor: pointer;
+}
+
+.grid.cell {
+    cursor: cell;
+}
+
+.hex {
+    --counter : 1;
+    grid-row: calc(var(--counter) + var(--counter))/span 2;
+    filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));
+    height: 0;
+    padding-bottom: 90%;
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transform: scale(1);
+}
+
+.hex:nth-of-type(odd){
+    grid-row: calc(var(--counter) + var(--counter) - 1)/span 2;
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    background-size: cover;
+    background-image: url(../../../assets/hex-border.png);
+    z-index: 1;
+}
+
+.left .hex , .right .hex{
+    margin-bottom: 0.4em;
+}
+
+.overlay {
+    position: absolute;
+    height: 99%;
+    width: 99%;
+    left: 0;
+    top: 0;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    background-size: cover;
+    background: #ECEFF9;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.borderWrapTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    height: 150px;
+    z-index: -1;
+}
+
+.borderWrapBottom {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    height: 75px;
+    z-index: -1;
+    transform: translateY(62%);
+}
+
+.borderWrapLeft , .borderWrapRight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    width: 86px;
+    z-index: -1;
+    height: calc(100% + 50px);
+}
+
+.borderWrapRight {
+    left: auto;
+    right: -16px;
+}
+
+.popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0 , 0, 0, 0.4);
+}
+
+.testWrapper {
+    max-width: 100%;
+    max-height: calc(100vh - 50px);
+}
+
+.tools {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 10;
+}
+
+
+@media only screen and (max-width: 640px) {
+    .tools {
+        display: none;
+    }
+}
+
+.zoom {
+    width: 35px;
+    height: 35px;
+    margin: 0 3px;
+}

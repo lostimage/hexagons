@@ -1,0 +1,77 @@
+.home {
+    padding-left: 100px;
+    transition: padding .3s ease-in-out;
+    touch-action: none;
+}
+@media screen and (min-width: 575px) {
+    .home {
+        padding-left: 200px;
+    }
+}
+@media screen and (min-width: 840px) {
+    .home {
+        padding-left:250px;
+    }
+}
+
+.home.closed {
+    padding-left: 0;
+}
+
+.menuToggler {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    padding-left: 10px;
+    width: 50px;
+    height:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+
+}
+
+@media only screen and (min-width: 641px) {
+   .menuToggler {
+       display: none;
+   }
+}
+.menuToggler > span,
+.menuToggler > span::before,
+.menuToggler > span::after {
+    display: block;
+    position: absolute;
+
+    width: 70%;
+    height: 2px;
+
+    background-color: #616161;
+
+    transition-duration: .25s;
+}
+.menuToggler > span::before,
+.menuToggler > span::after{
+    width: 100%;
+}
+.menuToggler > span::before {
+    content: '';
+    top: -8px;
+}
+.menuToggler > span::after {
+    content: '';
+    top: 8px;
+}
+
+.open.menuToggler > span {
+    transform: rotate(45deg);
+}
+.open.menuToggler > span::before {
+    top: 0;
+    transform: rotate(0);
+}
+.open.menuToggler > span::after {
+    top: 0;
+    transform: rotate(90deg);
+}

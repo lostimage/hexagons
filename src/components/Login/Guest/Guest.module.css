@@ -1,0 +1,103 @@
+.guestTitle {
+    color: #44546A;
+    cursor: pointer;
+}
+
+.guestMessage {
+    color: #44546A;
+}
+
+.control {
+    margin: 0.25rem 0;
+    flex-direction: column;
+    position: relative;
+    text-align: left;
+}
+
+.control label,
+.control input {
+    display: block;
+    width: 100%;
+}
+
+.control label {
+    font-weight: bold;
+    flex: 1;
+    color: #44546A;
+    font-size: 13px;
+    margin-bottom: 0.16em;
+}
+
+@media only screen and (min-width: 768px) {
+    .control label {
+        font-size: 20px;
+    }
+}
+
+.control input {
+    flex: 3;
+    font: inherit;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+@media only screen and (min-width: 768px) {
+    .control input {
+        padding: 0.35rem 0;
+    }
+}
+
+.control input:focus {
+    outline: none;
+    border-color: #4f005f;
+    background: #f6dbfc;
+}
+
+.control.invalid input {
+    border-color: red;
+    background: #fbdada;
+}
+
+.message {
+    color: red;
+    font-size: 13px;
+    margin: 0.25em 0;
+    position: absolute;
+    top: 100%;
+}
+
+.actions {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .control {
+        align-items: center;
+        flex-direction: row;
+        margin: 1rem 0;
+    }
+
+    .message {
+        font-size: 13px;
+    }
+}
+
+.btn {
+    display: block;
+    color: #44546A;
+    margin-top: 15px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    min-width: 150px;
+    background-color: #fff;
+    border: 2px solid #41719C;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}

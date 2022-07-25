@@ -1,0 +1,42 @@
+.quote {
+    max-width: 63vw;
+    margin: 0 auto 40px;
+    color: #44546A;
+    text-align: center;
+    font-weight: 400;
+}
+
+.intro {
+    padding: 20px 0;
+}
+
+.intro h1 {
+    font-size: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+   .intro h1 {
+       font-size: 2em;
+   }
+}
+
+.videoWrapper {
+    max-width: 95vw;
+    margin: 0 auto;
+    position: relative;
+    /*padding-bottom: 56.25%;*/
+}
+
+@media only screen and (min-width: 768px) {
+    .videoWrapper {
+        max-width: 55vw;
+    }
+}
+
+.video {
+    pointer-events: none;
+}
+
+.videoWrapper .video-react-control-bar {
+    display: none !important;
+}

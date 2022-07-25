@@ -1,0 +1,36 @@
+.wrapper {
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+.image {
+    opacity: 0.5;
+}
+
+.button {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 5px;
+    text-align: center;
+    padding: 7px 10px;
+    line-height: 1;
+}
+
+.wrapper:hover .tooltip{
+    opacity: 1;
+}
+
+img {
+    max-width: 100%;
+}

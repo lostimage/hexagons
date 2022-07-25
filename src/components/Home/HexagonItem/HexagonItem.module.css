@@ -1,0 +1,212 @@
+.hexagon {
+    position: relative;
+    grid-column: 1/span 3;
+    grid-row: calc(var(--counter) + var(--counter))/span 2;
+    -webkit-filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));
+    filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));
+    height: 0;
+    padding-bottom: 90%;
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transform: scale(1);
+}
+
+.hexagon.selected:before {
+    content: '';
+    background-image: url(../../../assets/hex-border-selected.png);
+    position: absolute;
+    left: -7px;
+    top: -5px;
+    bottom: -5px;
+    right: -5px;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    background-size: cover;
+    z-index: 0;
+}
+
+.content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: #111111;
+    background-size: 98%;
+    background-repeat: no-repeat;
+    background-position: center;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+    word-break: break-word;
+    z-index: 1;
+}
+
+.box {
+    /*max-width: calc((100vw - 210px) / 5);*/
+    /*max-height: calc((100vw - 210px) / 6);*/
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    hyphens: auto;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    background-size: cover;
+    background: #ECEFF9;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hexagon.active .overlay {
+    background-image: url(../../../assets/texture.png);
+    /*background-blend-mode: multiply;*/
+}
+
+/*.hexagon.green .box::before {*/
+/*    background-image: url(./img/green.jpg);*/
+/*}*/
+
+/*.hexagon.blue .box::before {*/
+/*    background-image: url(./img/blue.jpg);*/
+/*}*/
+/*.hexagon.red .box::before {*/
+/*    background-image: url(./img/red.jpg);*/
+/*}*/
+/*.hexagon.yellow .box::before {*/
+/*    background-image: url(./img/yellow.jpg);*/
+/*}*/
+/*.hexagon.violet .box::before {*/
+/*    background-image: url(./img/violet.jpg);*/
+/*}*/
+
+/*.hexagon.grey .box::before {*/
+/*    background-image: url(./img/grey.png);*/
+/*    background-blend-mode: normal;*/
+/*}*/
+
+.hexagon.grey {
+    /*filter: grayscale(1);*/
+}
+
+.textarea {
+    position: absolute;
+    inset: 0;
+    font-size: 22px;
+    opacity: 0;
+}
+
+.textcontent {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+}
+
+.textItemWrapper {
+    text-align:center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.textItem:empty {
+    line-height: 8.8vw;
+}
+.textItem , .popup{
+    outline: none;
+    border: none;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-line;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    line-height: 1.2;
+    cursor: text;
+}
+
+.popup {
+    font-size: 0.74vw;
+    line-height: 1.1;
+    word-break: normal;
+    background-color: #fff;
+    color: #576afb;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 250px;
+    z-index: 2;
+}
+
+
+.shapeLeft,.shapeRight {
+    content: "";
+    width: 23%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shapeLeft {
+    float: left;
+    clip-path: polygon(0 0, 100% 0, 0 50%, 100% 100%, 0 100%, 0 59%);
+    shape-outside: polygon(0 0, 100% 0, 0 50%, 100% 100%, 0 100%, 0 59%);
+}
+
+.shapeRight {
+    content: '';
+    float: right;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 100% 51%);
+    shape-outside: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 100% 51%);
+}
+
+.textItemValue {
+    outline: none;
+    border: none;
+    padding-top: 3.66vw;
+    line-break: anywhere;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+
+.box::after {
+    content: "";
+    position: absolute;
+    height: 99%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    background-size: cover;
+    background-image: url(../../../assets/hex-border.png);
+    z-index: 0;
+}
+
+.textItem {
+    display: block;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-weight: 300;
+    direction: ltr;
+}
+
+.textItemValue.bold {
+    font-weight: 700;
+}
+
+/*@media only screen and (max-width: 640px) {*/
+/*   .textItemValue:focus {*/
+/*       font-size: 16px;*/
+/*       transform: scale(0.66);*/
+/*       padding-top: 0 !important;*/
+/*   }*/
+/*}*/
