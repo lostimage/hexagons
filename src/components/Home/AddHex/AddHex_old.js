@@ -18,7 +18,7 @@ const AddHex_old = (props) => {
                 const rightTop = ($mid + x) + 'key' + ($mid + y);
                 const top = $mid + 'key' + ($mid + y);
                 const right = ($mid + x) + 'key' + $mid;
-                console.log(props.activeHexes)
+                // console.log(props.activeHexes)
                 switch (true){
                     case ($mid + y) > 23:
                         break;
@@ -30,28 +30,28 @@ const AddHex_old = (props) => {
                         break;
 
                     case props.activeHexes[left].color === false:
-                        console.log(left)
+                        // console.log(left)
                         return props.activeHexes[left].index;
                     case props.activeHexes[leftTop].color === false:
-                        console.log(leftTop)
+                        // console.log(leftTop)
                         return props.activeHexes[leftTop].index;
                     case props.activeHexes[rightBot].color === false:
-                        console.log(rightBot)
+                        // console.log(rightBot)
                         return props.activeHexes[rightBot].index;
                     case props.activeHexes[rightTop].color === false:
-                        console.log(rightTop)
+                        // console.log(rightTop)
                         return props.activeHexes[rightTop].index;
                     case props.activeHexes[leftBot].color === false:
-                        console.log(leftBot)
+                        // console.log(leftBot)
                         return props.activeHexes[leftBot].index;
                     case props.activeHexes[right].color === false:
-                        console.log(right)
+                        // console.log(right)
                         return props.activeHexes[right].index;
                     case props.activeHexes[top].color === false:
-                        console.log(top)
+                        // console.log(top)
                         return props.activeHexes[top].index;
                     case props.activeHexes[bottom].color === false:
-                        console.log(bottom)
+                        // console.log(bottom)
                         return props.activeHexes[bottom].index;
                     default:
                         break;

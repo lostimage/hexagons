@@ -44,7 +44,7 @@ const hexReducer = (state, action) => {
             }
         case 'SELECT_DATA':
             const selectedData = [action.data , ...state.selectData ]
-            console.log(selectedData)
+            // console.log(selectedData)
             return  {
                 ...state , selectData: selectedData
             }

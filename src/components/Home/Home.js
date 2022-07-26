@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useReducer, useState, useRef} from 'react';
+import React, {useContext, useEffect, useReducer, useState, useRef, useCallback} from 'react';
 
 import HexagonBoard from "./HexagonBoard/HexagonBoard";
 import Sidebar from "./Sidebar/Sidebar";
@@ -38,16 +38,16 @@ for (let i = 1; i <= hexagonX; i++) {
 //     a[x.id] = x;
 //     return a;
 // },{})
-// console.log(resExample)
+// // console.log(resExample)
 const resetScrollEffect = ({element}) => {
-    console.log(element.current)
+    // console.log(element.current)
     const middleTop = element.current.offsetHeight / 2 - window.innerHeight / 2;
     const middleWidth = window.innerWidth / 2;
     window.scrollTo(middleWidth, middleTop)
 }
 
 const Home = (props) => {
-    console.log(process.env)
+    // console.log(process.env)
     const ctx = useContext(HexContext)
     const authCtx = useContext(AuthContext)
     const [cursor, setCursor] = useState('auto')
@@ -70,7 +70,7 @@ const Home = (props) => {
         }, {})
         setHexagonData(keyList)
 
-        hexagons.map(item => hexagonData[item.id] !== undefined ? hexagonData[item.id] : item);
+        hexagons.forEach(item => hexagonData[item.id] !== undefined ? hexagonData[item.id] : item);
 
         if (authCtx.userName !== 'undefined' && authCtx.userName !== false && authCtx.userName !== undefined) {
             fetch(process.env.REACT_APP_GET_BOARD_URL + encodeURIComponent(authCtx.userName),
@@ -86,7 +86,7 @@ const Home = (props) => {
                     return response.json();
                 })
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     const responseData = response.data.canvasId
                     if (responseData !== undefined) {
                         setHexagons((prevState) => {
@@ -102,34 +102,35 @@ const Home = (props) => {
 
     }, [])
     useEffect(() => resetScrollEffect({element: tableRef}), [authCtx.isLoggedIn])
-    const activeAddHexagonHandler = (activeHexIndex) => {
-        setHexagons((prevState) => {
-            prevState[activeHexIndex].color = prevState[activeHexIndex].color === false ? color : prevState[activeHexIndex].color;
-            return [...prevState]
-        })
-    }
 
-    const contentDataHandler = (content, index) => {
+    const activeAddHexagonHandler = useCallback((activeHexIndex) => {
+        // setHexagons((prevState) => {
+        //     prevState[activeHexIndex].color = prevState[activeHexIndex].color === false ? color : prevState[activeHexIndex].color;
+        //     return prevState
+        // })
+    }, [])
+
+    const contentDataHandler = useCallback((content, index) => {
         setHexagons((prevState) => {
             prevState[index].content = content;
             return [...prevState]
         })
-    }
+    }, [])
 
-    const copyContentDataHandler = (index) => {
+    const copyContentDataHandler = useCallback((index) => {
         setHexagons((prevState) => {
             prevState[index].content = ctx.copyData.content;
             prevState[index].color = ctx.copyData.color;
             return [...prevState]
         })
-    }
+    }, [])
 
-    const selectedHexesHandler = (index, status) => {
+    const selectedHexesHandler = useCallback((index, status) => {
         setHexagons((prevState) => {
             prevState[index].selected = !status;
             return [...prevState]
         })
-    }
+    }, [])
 
     const colorHandler = (color) => {
         setHexagons((prevState) => {
@@ -139,14 +140,14 @@ const Home = (props) => {
         // setColor(color)
     }
 
-    const removeSelected = () => {
+    const removeSelected = useCallback(() => {
         setHexagons((prevState) => {
             const removedSelected = prevState.map(item => item.selected === true
                 ? {...item, selected: false}
                 : item);
             return [...removedSelected]
         })
-    }
+    }, [])
 
     const multiColorHandler = (color) => {
         setHexagons((prevState) => {
@@ -194,7 +195,7 @@ const Home = (props) => {
         })
     }
 
-    const multiCopyHandler = (index, posX, posY) => {
+    const multiCopyHandler = useCallback((index, posX, posY) => {
         const data = [...hexagons];
         const selectedData = data.filter(item => item.selected === true);
         if (selectedData.length == 0) return;
@@ -240,7 +241,7 @@ const Home = (props) => {
             })
             return [...prevState]
         })
-    }
+    }, [hexagons])
 
     const saveDataHandler = () => {
         const saveData = hexagons.filter(item => item.color !== false)
@@ -262,7 +263,7 @@ const Home = (props) => {
                     return response.json();
                 })
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                 })
 
         }
@@ -323,7 +324,7 @@ const Home = (props) => {
             const prevPositions = shuffleData.map(item => ({
                 ...item
             }))
-            console.log(prevPositions)
+            // console.log(prevPositions)
             let shuffled = shuffleData
                 .map(value => ({value, sort: Math.random()}))
                 .sort((a, b) => a.sort - b.sort)
@@ -363,7 +364,7 @@ const Home = (props) => {
                 enableBoldItem={enableBoldItem}
                 setBold={boldWeightHandler}
                 removeSelected={removeSelected}
-                setActive={activeAddHexagonHandler}
+                // setActive={activeAddHexagonHandler}
                 deleteAllSelected={removeSelectedHandler}
                 saveDataHandler={saveDataHandler}
                 clearDataHandler={clearDataHandler}
@@ -380,7 +381,7 @@ const Home = (props) => {
                 contentHandler={contentDataHandler}
                 activeColor={color}
                 hexagons={hexagons}
-                setActive={activeAddHexagonHandler}
+                // setActive={activeAddHexagonHandler}
             />
         </div>
     );

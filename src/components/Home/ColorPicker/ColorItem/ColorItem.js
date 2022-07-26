@@ -7,7 +7,7 @@ const ColorItem = (props) => {
 const ctx = useContext(HexContext)
 
     const colorHandler = () => {
-    console.log(ctx.activeHex)
+    // console.log(ctx.activeHex)
         if(ctx.selectMode === true){
             props.multiColorHandler(props.color)
         } else if(ctx.activeHex !== false && ctx.activeHex !== undefined) {
