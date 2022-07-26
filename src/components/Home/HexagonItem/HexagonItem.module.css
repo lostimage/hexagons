@@ -2,8 +2,8 @@
     position: relative;
     grid-column: 1/span 3;
     grid-row: calc(var(--counter) + var(--counter))/span 2;
-    -webkit-filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));
-    filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));
+    /*-webkit-filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));*/
+    /*filter: drop-shadow(0 0 10px rgba(68, 68, 68, 0.08));*/
     height: 0;
     padding-bottom: 90%;
     transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;

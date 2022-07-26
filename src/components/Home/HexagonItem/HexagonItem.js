@@ -13,6 +13,7 @@ const focusInput = ({element}) => {
     }, 0);
 }
 const HexagonItem = (props) => {
+    console.log('1');
     const [editable, setEditable] = useState(false)
     const [active, setActive] = useState(false);
     const itemRef = useRef(null)
