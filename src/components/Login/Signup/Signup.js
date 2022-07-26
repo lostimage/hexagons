@@ -13,7 +13,7 @@ const Signup = (props) => {
     const [inviteCode, setInviteCode] = useState('')
     const [authorizedMessage, setAuthorized] = useState(false)
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         fetch(process.env.REACT_APP_CREATE_URL,
             {
                 method: 'POST',
@@ -47,7 +47,7 @@ const Signup = (props) => {
     }
 
     const inviteCodeHandler = (e) => {
-        console.log(inviteCode)
+        // console.log(inviteCode)
         setInviteCode(e.target.value)
     }
     return (

@@ -13,13 +13,15 @@ const focusInput = ({element}) => {
     }, 0);
 }
 const HexagonItem = (props) => {
-    console.log(props)
+    console.log('1');
     const [editable, setEditable] = useState(false)
-    const [activeText, setActiveText] = useState('disabled');
+    const [active, setActive] = useState(false);
     const itemRef = useRef(null)
     const contentRef = useRef('')
     const editRef = useRef(null)
     const ctx = useContext(HexContext);
+    const [clickable, setClickable] = useState(true)
+    const [isMoving, setIsMoving] = useState(false)
 
     useEffect(() => {
         if (ctx.zoomHex === props.index) {
@@ -32,6 +34,23 @@ const HexagonItem = (props) => {
         updatePadding(editRef.current)
     }, [props.content])
 
+    const moveHandler = (e) => {
+        setIsMoving(false)
+        setTimeout(() => {
+            setClickable(true);
+        }, 100);
+    }
+
+    const checkIfDragging = () => {
+        if (isMoving && clickable) {
+            setClickable(false)
+        }
+    }
+
+    const preventClickHandler = () => {
+        setIsMoving(true)
+    }
+
     const row = props.hexY % 2 !== 0 ? (2 * props.hexX) + '/span 2' : (2 * props.hexX - 1) + '/span 2';
     const position = {
         '--counter': props.hexX,
@@ -41,6 +60,10 @@ const HexagonItem = (props) => {
 
     const backgroundColor = {
         backgroundColor: props.color
+            ? props.color
+            : active
+                ? "lightgray"
+                : props.color
     }
 
     const onActiveHexHandler = (e) => {
@@ -49,10 +72,10 @@ const HexagonItem = (props) => {
             setEditable(true)
             focusInput({element: editRef})
         }
-        if (props.click && !ctx.selectMode && !ctx.copyMode) {
-            setActiveText('')
+        if (clickable && !ctx.selectMode && !ctx.copyMode) {
+            setActive(true)
             ctx.enableHexItem(props.index)
-            props.setActive(props.index)
+            // props.setActive(props.index)
         }
     };
 
@@ -63,10 +86,10 @@ const HexagonItem = (props) => {
                 setEditable(true)
                 focusInput({element: editRef})
             }
-            if (props.click && !ctx.selectMode && !ctx.copyMode) {
-                setActiveText('')
+            if (clickable && !ctx.selectMode && !ctx.copyMode) {
+                setActive(true)
                 ctx.enableHexItem(props.index)
-                props.setActive(props.index)
+                // props.setActive(props.index)
             }
         }
     }
@@ -100,7 +123,7 @@ const HexagonItem = (props) => {
     }
 
     const selectHandler = () => {
-        if (props.click && !ctx.copyMode) {
+        if (clickable && !ctx.copyMode) {
             // ctx.selectData
             props.setSelected(props.index, props.selected);
         }
@@ -125,8 +148,8 @@ const HexagonItem = (props) => {
     }
 
     const clickHandler = (e) => {
-        console.log(props.click)
-        if(!props.click){
+        // console.log(clickable)
+        if(!clickable){
             return;
         }
         if (ctx.selectMode && props.color !== false) {
@@ -171,7 +194,14 @@ const HexagonItem = (props) => {
     const click = useSingleAndDoubleClick(clickHandler, onDoubleClickHandler);
 
     return (
-        <div ref={itemRef} onClick={click} data-position={props.color} data-x={props.hexX} data-y={props.hexY}
+        <div ref={itemRef}
+             onMouseMove={checkIfDragging}
+             onMouseDown={preventClickHandler}
+             onMouseUp={moveHandler}
+             onClick={click}
+             data-position={props.color}
+             data-x={props.hexX}
+             data-y={props.hexY}
              style={position} className={`
              ${classes.hexagon} 
              ${classes[props.color !== false ? 'active' : '']}

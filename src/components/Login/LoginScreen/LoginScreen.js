@@ -22,12 +22,12 @@ const LoginScreen = (props) => {
             }
         )
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 return response.json();
             })
             .then((response) => {
                 if(response.status === true) {
-                    console.log(response)
+                    // console.log(response)
                     setResponseStatus(response.message)
                     ctx.onLogin(data.userName , response.token);
                 } else {

@@ -19,7 +19,9 @@ const Sidebar = (props) => {
     return (
         <section style={{'--mobZoom': props.mobileZoom}} className={`${classes.navbar} ${classes[authCtx.menuToggle]}`}>
             <img tabindex="0" className={classes.logo} src={require('../../../assets/logo.png')}/>
-            <Boards activeHexes={props.activeHexes} setActive={props.setActive}/>
+            <Boards activeHexes={props.activeHexes}
+                    // setActive={props.setActive}
+            />
             <div className={classes.iconWrapper}>
                 <Copy removeSelected={props.removeSelected} />
                 <ColorPicker selectMode={props.selectMode} multiColorHandler={props.multiColorHandler} setColor={props.setColor}/>

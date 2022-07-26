@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react';
 import Hexagon from "../../Login/Hexagon/Hexagon";
 import HexagonItem from "../HexagonItem/HexagonItem";
 import classes from './HexagonBoard.module.css';
@@ -6,8 +6,6 @@ import AuthContext from "../../../store/auth-context";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 
 const HexagonBoard = React.forwardRef((props, ref) => {
-    const [clickable, setClickable] = useState(true)
-    const [isMoving, setIsMoving] = useState(false)
     const [popupActive, setPopupActive] = useState(false)
     const authCtx = useContext(AuthContext)
     const [panning, setPanning] = useState(false)
@@ -15,20 +13,20 @@ const HexagonBoard = React.forwardRef((props, ref) => {
     const popupHandler = () => {
         setPopupActive(!popupActive)
     }
-    const panningHandler = (state) => {
+    const panningHandler = useCallback((state) => {
         setPanning(state)
-    }
+    }, [])
+
     const hexagonsList = props.hexagons.map((item, index) => <HexagonItem
-        popupHandler={popupHandler}
         hexagons={props.hexagons}
         multiCopyHandler={props.multiCopyHandler}
         copyContentDataHandler={props.copyContentDataHandler}
         setSelected={props.setSelected}
         removeSelected={props.removeSelected}
         contentHandler={props.contentHandler}
-        setActive={props.setActive}
+        // setActive={props.setActive}
         activeColor={props.activeColor}
-        cursorHandler={props.setCursor}
+        // cursorHandler={props.setCursor}
         selected={item.selected}
         index={item.index}
         content={item.content}
@@ -36,7 +34,6 @@ const HexagonBoard = React.forwardRef((props, ref) => {
         color={item.color}
         key={item.id}
         bold={item.bold}
-        click={clickable}
         info={item.info}
         hexP={item.hexP}
         hexX={item.hexX}
@@ -52,60 +49,45 @@ const HexagonBoard = React.forwardRef((props, ref) => {
         }
     }
 
-    const moveHandler = (e) => {
-        setIsMoving(false)
-        setTimeout(() => {
-            setClickable(true);
-        }, 100);
-    }
-
-    const checkIfDragging = () => {
-        if (isMoving && clickable) {
-            setClickable(false)
-        }
-    }
-
-    const preventClickHandler = () => {
-        setIsMoving(true)
-    }
-
     // const stopClickable = () => {
-    //     console.log('stop')
+    //     // console.log('stop')
     //     setClickable(false)
     // }
     //
     // const enableClickable = () => {
-    //     console.log('start')
+    //     // console.log('start')
     //     setTimeout(() => {
     //         setClickable(true);
     //     }, 100);
     // }
 
-    const borderSize = 25;
-    let borderListTop = [];
-    let borderListBottom = [];
-    let borderListLeft = [];
-    let borderListRight = [];
-    let borders = [{name: 't', array: borderListTop}, {name: 'b', array: borderListBottom}, {
-        name: 'l',
-        array: borderListLeft
-    }, {name: 'r', array: borderListRight}]
-    let col = 1;
-    for (let i = 1; i <= borderSize; i++) {
-        borders.map(item => {
-            return (
-                item.array = [
-                    <div key={item.name + i} style={{gridColumn: col + '/span 3'}} className={classes.hex}>
-                        <div className={classes.box}/>
-                        <div className={classes.overlay}/>
-                    </div>
-                    , ...item.array]
-            )
-        })
+    const getBorders = useMemo(() => {
+        const borderSize = 25;
+        let borderListTop = [];
+        let borderListBottom = [];
+        let borderListLeft = [];
+        let borderListRight = [];
+        let borders = [{name: 't', array: borderListTop}, {name: 'b', array: borderListBottom}, {
+            name: 'l',
+            array: borderListLeft
+        }, {name: 'r', array: borderListRight}]
+        let col = 1;
+        for (let i = 1; i <= borderSize; i++) {
+            borders.forEach(item => {
+                return (
+                    item.array = [
+                        <div key={item.name + i} style={{gridColumn: col + '/span 3'}} className={classes.hex}>
+                            <div className={classes.box}/>
+                            <div className={classes.overlay}/>
+                        </div>
+                        , ...item.array]
+                )
+            })
 
-        col += 2;
-    }
-
+            col += 2;
+        }
+        return borders
+    }, [])
 
     return (
 
@@ -128,21 +110,18 @@ const HexagonBoard = React.forwardRef((props, ref) => {
                             wrapperClass={classes.testWrapper}
                         >
                             <div
-                                onMouseMove={checkIfDragging}
-                                onMouseDown={preventClickHandler}
-                                onMouseUp={moveHandler}
                                 className={classes.grid}>
                                 <div className={classes.borderWrapTop}>
-                                    <div className={`${classes.border} ${classes.top}`}>{borders[0].array}</div>
+                                    <div className={`${classes.border} ${classes.top}`}>{getBorders[0].array}</div>
                                 </div>
                                 <div className={classes.borderWrapBottom}>
-                                    <div className={`${classes.border} ${classes.bottom}`}>{borders[1].array}</div>
+                                    <div className={`${classes.border} ${classes.bottom}`}>{getBorders[1].array}</div>
                                 </div>
                                 <div className={classes.borderWrapLeft}>
-                                    <div className={`${classes.left}`}>{borders[2].array}</div>
+                                    <div className={`${classes.left}`}>{getBorders[2].array}</div>
                                 </div>
                                 <div className={classes.borderWrapRight}>
-                                    <div className={`${classes.right}`}>{borders[3].array}</div>
+                                    <div className={`${classes.right}`}>{getBorders[3].array}</div>
                                 </div>
                                 {hexagonsList}
                             </div>
